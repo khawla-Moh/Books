@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 
 
 class Book(models.Model):
-    author=models.ForeignKey(User,related_name="book_author",on_delete=models.CASCADE)
+    author=models.ForeignKey('Author',related_name="book_author",on_delete=models.CASCADE)
     title=models.CharField(max_length=100)
     publication_date=models.DateTimeField(default=timezone.now)
     price=models.DecimalField(max_digits=10,decimal_places=3)
@@ -21,5 +21,10 @@ class Author(models.Model):
     name=models.CharField(max_length=100)
     birth_date=models.DateTimeField(default=timezone.now)
     biography=models.TextField(max_length=20000)
-    rating = models.DecimalField(max_digits=2, decimal_places=1)
     
+
+class Review(models.Model):
+    reviewer_name=models.CharField(max_length=100)
+    content=models.TextField(max_length=20000)
+    rating = models.DecimalField(max_digits=2, decimal_places=1)
+    book=models.ForeignKey(Book,related_name="review_book",on_delete=models.CASCADE)
