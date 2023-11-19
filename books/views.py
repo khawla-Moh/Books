@@ -18,7 +18,7 @@ def create_book(request):
 
 
 def edit_book(request,pk):
-    book=book.objects.get(id=pk)
+    book=Book.objects.get(id=pk)
     if request.method=='POST':
         form=BookForm(request.POST,instance=book)
         if  form.is_valid():

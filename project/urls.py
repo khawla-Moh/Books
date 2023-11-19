@@ -20,6 +20,6 @@ from books.views import create_book,edit_book,delete_book
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('books/new',create_book),
-    path('books/<int:pk>/edit',edit_book)
+    path('books/<int:pk>/edit',edit_book),
     path('books/<int:pk>/delete',delete_book)
 ]
