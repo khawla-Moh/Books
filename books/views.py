@@ -5,6 +5,37 @@ from .forms import BookForm
 
 
 
+def book_list(request):
+    data=Book.objects.all( )  #from db get all posts
+    context={
+        'data':data
+    }
+    return render(request,'books/book.html',context)
+
+
+
+
+def book_details(request,book_id):
+    data=Book.objects.get(id=book_id)
+    if request.method=='POST':
+        form=BookForm(request.POST)
+        if form.is_valid():
+            myform=form.save(commit=False)
+            myform.post=data
+            myform.save()
+    else:
+        form=BookForm()
+
+    context={
+        'post_de':data,
+         'form':form
+    }
+    return render(request,'books/book_detail.html',context)
+
+
+
+
+
 def create_book(request):
     if request.method=='POST':
         form=BookForm(request.POST)
